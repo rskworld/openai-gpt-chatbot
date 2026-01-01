@@ -1,0 +1,715 @@
+/*
+OpenAI GPT Chatbot - Stylesheet
+Author: RSK World
+Website: https://rskworld.in
+Email: help@rskworld.in
+Phone: +91 93305 39277
+Year: 2026
+*/
+
+/* Author: RSK World (https://rskworld.in) - Year: 2026 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    color: #333;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header Styles */
+/* Author: RSK World (https://rskworld.in) - Year: 2026 */
+header {
+    background: white;
+    border-radius: 15px;
+    padding: 20px 30px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.header-content h1 {
+    color: #667eea;
+    font-size: 28px;
+    margin-bottom: 5px;
+}
+
+.header-content .subtitle {
+    color: #666;
+    font-size: 14px;
+}
+
+.header-content a {
+    color: #667eea;
+    text-decoration: none;
+}
+
+.header-content a:hover {
+    text-decoration: underline;
+}
+
+.header-actions {
+    display: flex;
+    gap: 10px;
+}
+
+/* Button Styles */
+/* Author: RSK World (https://rskworld.in) - Year: 2026 */
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-primary {
+    background: #667eea;
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #5568d3;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(102, 126, 234, 0.3);
+}
+
+.btn-secondary {
+    background: #6c757d;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background: #5a6268;
+}
+
+/* Chat Container */
+/* Author: RSK World (https://rskworld.in) - Year: 2026 */
+.chat-container {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 200px);
+    min-height: 600px;
+}
+
+.chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.welcome-message {
+    text-align: center;
+    padding: 40px 20px;
+    color: #666;
+}
+
+.welcome-message i {
+    font-size: 64px;
+    color: #667eea;
+    margin-bottom: 20px;
+}
+
+.welcome-message h2 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.welcome-message .info {
+    margin-top: 20px;
+    font-size: 12px;
+}
+
+.welcome-message a {
+    color: #667eea;
+    text-decoration: none;
+}
+
+/* Message Styles */
+/* Author: RSK World (https://rskworld.in) - Year: 2026 */
+.message {
+    display: flex;
+    gap: 10px;
+    max-width: 80%;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.message.user {
+    align-self: flex-end;
+    flex-direction: row-reverse;
+}
+
+.message.assistant {
+    align-self: flex-start;
+}
+
+.message-content {
+    padding: 12px 16px;
+    border-radius: 12px;
+    word-wrap: break-word;
+}
+
+.message.user .message-content {
+    background: #667eea;
+    color: white;
+    border-bottom-right-radius: 4px;
+}
+
+.message.assistant .message-content {
+    background: #f1f3f5;
+    color: #333;
+    border-bottom-left-radius: 4px;
+}
+
+.message-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.message.user .message-icon {
+    background: #667eea;
+    color: white;
+}
+
+.message.assistant .message-icon {
+    background: #f1f3f5;
+    color: #667eea;
+}
+
+/* Chat Input */
+/* Author: RSK World (https://rskworld.in) - Year: 2026 */
+.chat-input-container {
+    border-top: 1px solid #e9ecef;
+    padding: 20px;
+}
+
+.input-wrapper {
+    display: flex;
+    gap: 10px;
+    align-items: flex-end;
+}
+
+#messageInput {
+    flex: 1;
+    padding: 12px 16px;
+    border: 2px solid #e9ecef;
+    border-radius: 12px;
+    font-size: 14px;
+    font-family: inherit;
+    resize: none;
+    max-height: 120px;
+    overflow-y: auto;
+}
+
+#messageInput:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+.input-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+    font-size: 12px;
+    color: #666;
+}
+
+.model-info {
+    font-weight: 500;
+}
+
+.typing-indicator {
+    color: #667eea;
+}
+
+/* Modal Styles */
+/* Author: RSK World (https://rskworld.in) - Year: 2026 */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    animation: fadeIn 0.3s ease;
+}
+
+.modal-content {
+    background-color: white;
+    margin: 5% auto;
+    padding: 0;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.modal-header {
+    padding: 20px 30px;
+    border-bottom: 1px solid #e9ecef;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h2 {
+    color: #333;
+    font-size: 24px;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 28px;
+    cursor: pointer;
+    color: #666;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.close-btn:hover {
+    color: #333;
+}
+
+.modal-body {
+    padding: 30px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #333;
+    font-weight: 500;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px 12px;
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: inherit;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+.slider {
+    width: 100%;
+    height: 6px;
+    border-radius: 3px;
+    background: #e9ecef;
+    outline: none;
+    -webkit-appearance: none;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #667eea;
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #667eea;
+    cursor: pointer;
+    border: none;
+}
+
+.modal-footer {
+    padding: 20px 30px;
+    border-top: 1px solid #e9ecef;
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* Footer */
+/* Author: RSK World (https://rskworld.in) - Year: 2026 */
+footer {
+    text-align: center;
+    padding: 20px;
+    color: white;
+    font-size: 14px;
+}
+
+footer a {
+    color: white;
+    text-decoration: none;
+    margin: 0 5px;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive Design */
+/* Author: RSK World (https://rskworld.in) - Year: 2026 */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .header-actions {
+        width: 100%;
+        justify-content: flex-end;
+    }
+
+    .chat-container {
+        height: calc(100vh - 250px);
+        min-height: 500px;
+    }
+
+    .message {
+        max-width: 90%;
+    }
+
+    .modal-content {
+        width: 95%;
+        margin: 10% auto;
+    }
+}
+
+/* Scrollbar Styles */
+/* Author: RSK World (https://rskworld.in) - Year: 2026 */
+.chat-messages::-webkit-scrollbar {
+    width: 8px;
+}
+
+.chat-messages::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.chat-messages::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+.chat-messages::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Dark Mode Styles */
+/* Author: RSK World (https://rskworld.in) - Year: 2026 */
+body.dark-mode {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    color: #e0e0e0;
+}
+
+body.dark-mode header {
+    background: #2d2d44;
+    color: #e0e0e0;
+}
+
+body.dark-mode .header-content h1 {
+    color: #8b9aff;
+}
+
+body.dark-mode .chat-container {
+    background: #2d2d44;
+}
+
+body.dark-mode .message.assistant .message-content {
+    background: #3d3d5c;
+    color: #e0e0e0;
+}
+
+body.dark-mode .message.user .message-content {
+    background: #667eea;
+}
+
+body.dark-mode #messageInput {
+    background: #3d3d5c;
+    color: #e0e0e0;
+    border-color: #4d4d6c;
+}
+
+body.dark-mode .modal-content {
+    background: #2d2d44;
+    color: #e0e0e0;
+}
+
+body.dark-mode .form-control {
+    background: #3d3d5c;
+    color: #e0e0e0;
+    border-color: #4d4d6c;
+}
+
+body.dark-mode .search-result-item {
+    background: #3d3d5c;
+    border-color: #4d4d6c;
+}
+
+/* Markdown Content Styles */
+/* Author: RSK World (https://rskworld.in) - Year: 2026 */
+.markdown-content {
+    line-height: 1.6;
+}
+
+.markdown-content h1,
+.markdown-content h2,
+.markdown-content h3 {
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+}
+
+.markdown-content code {
+    background: rgba(0, 0, 0, 0.1);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9em;
+}
+
+.markdown-content pre {
+    background: rgba(0, 0, 0, 0.1);
+    padding: 12px;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 10px 0;
+}
+
+.markdown-content pre code {
+    background: none;
+    padding: 0;
+}
+
+.markdown-content ul,
+.markdown-content ol {
+    margin-left: 20px;
+    margin-top: 10px;
+}
+
+.markdown-content blockquote {
+    border-left: 4px solid #667eea;
+    padding-left: 15px;
+    margin: 10px 0;
+    font-style: italic;
+}
+
+body.dark-mode .markdown-content code {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode .markdown-content pre {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+/* Statistics Styles */
+/* Author: RSK World (https://rskworld.in) - Year: 2026 */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.stat-item {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    border: 2px solid #e9ecef;
+}
+
+.stat-item h3 {
+    font-size: 32px;
+    color: #667eea;
+    margin-bottom: 5px;
+}
+
+.stat-item p {
+    color: #666;
+    font-size: 14px;
+    margin: 0;
+}
+
+body.dark-mode .stat-item {
+    background: #3d3d5c;
+    border-color: #4d4d6c;
+}
+
+body.dark-mode .stat-item p {
+    color: #b0b0b0;
+}
+
+.stats-details {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #e9ecef;
+}
+
+body.dark-mode .stats-details {
+    border-top-color: #4d4d6c;
+}
+
+/* Export Options */
+/* Author: RSK World (https://rskworld.in) - Year: 2026 */
+.export-options {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-top: 15px;
+}
+
+.export-options .btn {
+    flex: 1;
+    min-width: 150px;
+}
+
+/* Search Results */
+/* Author: RSK World (https://rskworld.in) - Year: 2026 */
+.search-results {
+    max-height: 400px;
+    overflow-y: auto;
+    margin-top: 15px;
+}
+
+.search-result-item {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #e9ecef;
+}
+
+.search-result-item strong {
+    color: #667eea;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.search-result-item p {
+    margin: 0;
+    color: #666;
+    line-height: 1.5;
+}
+
+body.dark-mode .search-result-item p {
+    color: #b0b0b0;
+}
+
+/* Stream Toggle */
+/* Author: RSK World (https://rskworld.in) - Year: 2026 */
+.stream-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: #666;
+}
+
+.stream-toggle input[type="checkbox"] {
+    cursor: pointer;
+}
+
+body.dark-mode .stream-toggle {
+    color: #b0b0b0;
+}
+
+/* Header Actions Spacing */
+/* Author: RSK World (https://rskworld.in) - Year: 2026 */
+.header-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.header-actions .btn {
+    padding: 8px 16px;
+    font-size: 13px;
+}
+
+/* Responsive Header Actions */
+@media (max-width: 768px) {
+    .header-actions .btn {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+    
+    .header-actions .btn i {
+        margin-right: 4px;
+    }
+}
+

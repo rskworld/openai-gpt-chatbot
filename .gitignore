@@ -1,0 +1,54 @@
+# OpenAI GPT Chatbot - Git Ignore
+# Author: RSK World (https://rskworld.in)
+# Email: help@rskworld.in
+# Phone: +91 93305 39277
+# Year: 2026
+
+# Environment variables
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environment
+venv/
+ENV/
+env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Conversation files
+conversations/
+*.json
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+

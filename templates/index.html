@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<!--
+OpenAI GPT Chatbot - Web Interface
+Author: RSK World
+Website: https://rskworld.in
+Email: help@rskworld.in
+Phone: +91 93305 39277
+Year: 2026
+-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenAI GPT Chatbot - RSK World</title>
+    <!-- Author: RSK World (https://rskworld.in) - Year: 2026 -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
+    <!-- Author: RSK World (https://rskworld.in) - Year: 2026 -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+</head>
+<body>
+    <!-- Author: RSK World (https://rskworld.in) - Year: 2026 -->
+    <div class="container">
+        <header>
+            <!-- Author: RSK World (https://rskworld.in) - Year: 2026 -->
+            <div class="header-content">
+                <h1><i class="fas fa-robot"></i> OpenAI GPT Chatbot</h1>
+                <p class="subtitle">Powered by GPT-3 & GPT-4 | Created by <a href="https://rskworld.in" target="_blank">RSK World</a></p>
+            </div>
+            <div class="header-actions">
+                <!-- Author: RSK World (https://rskworld.in) - Year: 2026 -->
+                <button id="statsBtn" class="btn btn-secondary" title="Statistics">
+                    <i class="fas fa-chart-bar"></i> Stats
+                </button>
+                <button id="exportBtn" class="btn btn-secondary" title="Export conversation">
+                    <i class="fas fa-download"></i> Export
+                </button>
+                <button id="searchBtn" class="btn btn-secondary" title="Search conversation">
+                    <i class="fas fa-search"></i> Search
+                </button>
+                <button id="clearBtn" class="btn btn-secondary" title="Clear conversation">
+                    <i class="fas fa-trash"></i> Clear
+                </button>
+                <button id="themeToggle" class="btn btn-secondary" title="Toggle dark mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button id="settingsBtn" class="btn btn-secondary" title="Settings">
+                    <i class="fas fa-cog"></i> Settings
+                </button>
+            </div>
+        </header>
+
+        <div class="chat-container">
+            <!-- Author: RSK World (https://rskworld.in) - Year: 2026 -->
+            <div id="chatMessages" class="chat-messages">
+                <div class="welcome-message">
+                    <!-- Author: RSK World (https://rskworld.in) - Year: 2026 -->
+                    <i class="fas fa-robot"></i>
+                    <h2>Welcome to OpenAI GPT Chatbot</h2>
+                    <p>Start a conversation by typing a message below.</p>
+                    <p class="info">Created by <a href="https://rskworld.in" target="_blank">RSK World</a> | Year: 2026</p>
+                </div>
+            </div>
+
+            <div class="chat-input-container">
+                <!-- Author: RSK World (https://rskworld.in) - Year: 2026 -->
+                <div class="input-wrapper">
+                    <textarea id="messageInput" placeholder="Type your message here..." rows="1"></textarea>
+                    <button id="sendBtn" class="btn btn-primary">
+                        <i class="fas fa-paper-plane"></i> Send
+                    </button>
+                </div>
+                <div class="input-footer">
+                    <!-- Author: RSK World (https://rskworld.in) - Year: 2026 -->
+                    <span class="model-info">Model: <span id="currentModel">gpt-3.5-turbo</span></span>
+                    <label class="stream-toggle">
+                        <input type="checkbox" id="streamToggle" checked> Stream Response
+                    </label>
+                    <span class="typing-indicator" id="typingIndicator" style="display: none;">
+                        <i class="fas fa-spinner fa-spin"></i> Thinking...
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Settings Modal -->
+        <!-- Author: RSK World (https://rskworld.in) - Year: 2026 -->
+        <div id="settingsModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2><i class="fas fa-cog"></i> Settings</h2>
+                    <button class="close-btn" id="closeSettings">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <!-- Author: RSK World (https://rskworld.in) - Year: 2026 -->
+                    <div class="form-group">
+                        <label for="modelSelect">Model:</label>
+                        <select id="modelSelect" class="form-control">
+                            <option value="gpt-3.5-turbo">GPT-3.5 Turbo</option>
+                            <option value="gpt-4">GPT-4</option>
+                            <option value="gpt-4-turbo-preview">GPT-4 Turbo</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <!-- Author: RSK World (https://rskworld.in) - Year: 2026 -->
+                        <label for="temperatureSlider">Temperature: <span id="temperatureValue">0.7</span></label>
+                        <input type="range" id="temperatureSlider" min="0" max="2" step="0.1" value="0.7" class="slider">
+                    </div>
+                    <div class="form-group">
+                        <!-- Author: RSK World (https://rskworld.in) - Year: 2026 -->
+                        <label for="maxTokensInput">Max Tokens:</label>
+                        <input type="number" id="maxTokensInput" min="1" max="4096" value="500" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <!-- Author: RSK World (https://rskworld.in) - Year: 2026 -->
+                        <label for="personaSelect">Persona:</label>
+                        <select id="personaSelect" class="form-control">
+                            <option value="default">Default Assistant</option>
+                            <option value="coding">Coding Assistant</option>
+                            <option value="creative">Creative Writer</option>
+                            <option value="teacher">Educational Tutor</option>
+                            <option value="business">Business Advisor</option>
+                            <option value="friendly">Friendly Chat</option>
+                            <option value="technical">Technical Expert</option>
+                            <option value="translator">Translation Assistant</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <!-- Author: RSK World (https://rskworld.in) - Year: 2026 -->
+                    <button class="btn btn-primary" id="saveSettings">Save Settings</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Statistics Modal -->
+        <!-- Author: RSK World (https://rskworld.in) - Year: 2026 -->
+        <div id="statsModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2><i class="fas fa-chart-bar"></i> Statistics</h2>
+                    <button class="close-btn" id="closeStats">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div id="statsContent">
+                        <p>Loading statistics...</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" id="resetStats">Reset Stats</button>
+                    <button class="btn btn-primary" id="closeStatsBtn">Close</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Export Modal -->
+        <!-- Author: RSK World (https://rskworld.in) - Year: 2026 -->
+        <div id="exportModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2><i class="fas fa-download"></i> Export Conversation</h2>
+                    <button class="close-btn" id="closeExport">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p>Choose export format:</p>
+                    <div class="export-options">
+                        <button class="btn btn-primary" id="exportJSON">
+                            <i class="fas fa-file-code"></i> Export as JSON
+                        </button>
+                        <button class="btn btn-primary" id="exportTXT">
+                            <i class="fas fa-file-alt"></i> Export as TXT
+                        </button>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" id="closeExportBtn">Cancel</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Search Modal -->
+        <!-- Author: RSK World (https://rskworld.in) - Year: 2026 -->
+        <div id="searchModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2><i class="fas fa-search"></i> Search Conversation</h2>
+                    <button class="close-btn" id="closeSearch">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <input type="text" id="searchInput" class="form-control" placeholder="Enter search query...">
+                    </div>
+                    <div id="searchResults" class="search-results"></div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" id="performSearch">Search</button>
+                    <button class="btn btn-secondary" id="closeSearchBtn">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <!-- Author: RSK World (https://rskworld.in) - Year: 2026 -->
+        <p>&copy; 2026 <a href="https://rskworld.in" target="_blank">RSK World</a> | 
+           <a href="mailto:help@rskworld.in">help@rskworld.in</a> | 
+           <a href="tel:+919330539277">+91 93305 39277</a></p>
+    </footer>
+
+    <!-- Author: RSK World (https://rskworld.in) - Year: 2026 -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
+
